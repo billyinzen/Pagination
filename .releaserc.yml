@@ -1,0 +1,23 @@
+branches:
+  - main
+plugins:
+  - "@semantic-release/commit-analyzer"
+  - "@semantic-release/release-notes-generator"
+  -
+    - "@semantic-release/changelog"
+    - changelogFile: "changelog.md"
+  -
+    - "semantic-release-replace-plugin"
+    - replacements:
+        - files: "src/BillYinzen.Pagination/BillYinzen.Pagination.csproj"
+          from: "<Version>*.*.*</Version>"
+          to: "<Version>${nextRelease.version}</Version>"
+  -
+    - "@semantic-release/git"
+    - assets:
+      - path: "docs/changelog.md"
+        label: changelog
+      - path: "src/BillYinzen.Pagination/BillYinzen.Pagination.csproj"
+        label: project file
+  -
+    - "@semantic-release/github"
